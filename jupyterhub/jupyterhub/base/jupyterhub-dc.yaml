@@ -86,7 +86,12 @@ spec:
             secretKeyRef:
               name: $(jupyterhub_secret)
               key: CONFIGPROXY_AUTH_TOKEN
-        image: quay.io/odh-jupyterhub/jupyterhub-img:v0.3.0
+        - name: NOTEBOOK_NAMESPACE
+          valueFrom:
+            configMapKeyRef:
+              name: jupyterhub-cfg
+              key: notebook_destination
+        image: quay.io/odh-jupyterhub/jupyterhub-img:v0.3.1
         imagePullPolicy: "Always"
         name: jupyterhub
         ports:
