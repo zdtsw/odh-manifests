@@ -27,3 +27,11 @@ rules:
       - route.openshift.io
     resources:
       - routes
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - console.openshift.io
+    resources:
+      - consolelinks
