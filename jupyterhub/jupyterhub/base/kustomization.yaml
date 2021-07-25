@@ -4,11 +4,6 @@ kind: Kustomization
 resources:
 - jupyterhub-configmap.yaml
 - jupyterhub-secret.yaml
-- jupyterhub-db-pvc.yaml
-- jupyterhub-db-probe.yaml
-- jupyterhub-db-probe-svc.yaml
-- jupyterhub-db-dc.yaml
-- jupyterhub-db-service.yaml
 - jupyterhub-dc.yaml
 - jupyterhub-service.yaml
 - jupyterhub-serviceaccount.yaml
@@ -89,5 +84,12 @@ vars:
     apiVersion: v1
   fieldref:
     fieldpath: data.traefik_credentials_secret
+- name: jupyterhub_rds_secret
+  objref:
+    kind: ConfigMap
+    name: parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.jupyterhub_rds_secret
 configurations:
 - params.yaml
