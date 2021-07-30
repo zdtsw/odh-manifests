@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+bases:
+  - ../../base
+
+resources:
+  - ./jupyterhub-db-dc.yaml
+  - ./jupyterhub-db-service.yaml
+  - ./jupyterhub-db-pvc.yaml
+  - ./jupyterhub-db-probe.yaml
+  - ./jupyterhub-db-probe-svc.yaml

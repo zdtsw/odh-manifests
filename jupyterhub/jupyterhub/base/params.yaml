@@ -18,3 +18,7 @@ varReference:
   kind: ConfigMap
 - path: subjects/name
   kind: RoleBinding
+- path: spec/secretRef/name
+  kind: Postgres
+- path: spec/secretRef/namespace
+  kind: Postgres

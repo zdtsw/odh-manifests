@@ -29,7 +29,7 @@ spec:
         function generate_payload() {
           echo '{"kind":"Scale","apiVersion":"autoscaling/v1","metadata":{"name":"'$1'","namespace":"'${OPENSHIFT_DEPLOYMENT_NAMESPACE}'"},"spec":{"replicas": '$2'}}'
         };
-        
+
         function post_scale() {
           curl -kL -XPUT -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" https://openshift.default.svc.cluster.local/api/v1/namespaces/${OPENSHIFT_DEPLOYMENT_NAMESPACE}/replicationcontrollers/$1/scale -d @$2;
         };
@@ -42,8 +42,8 @@ spec:
         export OLD_RC=$(get_latest);
 
         echo $(generate_payload ${OLD_RC} 0) > /tmp/old.yaml;
-        echo $(generate_payload ${OPENSHIFT_DEPLOYMENT_NAME} $(get_replicas)) > /tmp/new.yaml;    
-  
+        echo $(generate_payload ${OPENSHIFT_DEPLOYMENT_NAME} $(get_replicas)) > /tmp/new.yaml;
+
         post_scale ${OLD_RC} /tmp/old.yaml;
         post_scale ${OPENSHIFT_DEPLOYMENT_NAME} /tmp/new.yaml;
 
@@ -72,6 +72,8 @@ spec:
               fieldPath: metadata.namespace
         - name: JUPYTERHUB_SERVICE_NAME
           value: jupyterhub
+        - name: JUPYTERHUB_DATABASE_USER
+          value: jupyterhub
         - name: JUPYTERHUB_DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -79,6 +81,8 @@ spec:
               key: POSTGRESQL_PASSWORD
         - name: JUPYTERHUB_DATABASE_HOST
           value: jupyterhub-db
+        - name: JUPYTERHUB_DATABASE_NAME
+          value: jupyterhub
         - name: PROMETHEUS_API_TOKEN
           valueFrom:
             secretKeyRef:
@@ -184,6 +188,8 @@ spec:
       - command:
         - wait-for-database
         env:
+        - name: JUPYTERHUB_DATABASE_USER
+          value: jupyterhub
         - name: JUPYTERHUB_DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -191,6 +197,8 @@ spec:
               key: POSTGRESQL_PASSWORD
         - name: JUPYTERHUB_DATABASE_HOST
           value: jupyterhub-db
+        - name: JUPYTERHUB_DATABASE_NAME
+          value: jupyterhub
         image: quay.io/odh-jupyterhub/jupyterhub-img:v0.3.3
         imagePullPolicy: "Always"
         name: wait-for-database
