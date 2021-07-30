@@ -19,7 +19,8 @@ spec:
         name: traefik-proxy
     spec:
       serviceAccountName: traefik-proxy
-
+      imagePullSecrets:
+      - name: addon-managed-odh-pullsecret
       volumes:
       - name: config
         configMap:
