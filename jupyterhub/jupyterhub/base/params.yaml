@@ -14,6 +14,8 @@ varReference:
   kind: DeploymentConfig
 - path: spec/template/spec/initContainers/env/valueFrom/secretKeyRef/name
   kind: DeploymentConfig
+- path: spec/template/spec/containers[]/env/valueFrom/secretKeyRef/name
+  kind: Deployment
 - path: data/notebook_destination
   kind: ConfigMap
 - path: subjects/name

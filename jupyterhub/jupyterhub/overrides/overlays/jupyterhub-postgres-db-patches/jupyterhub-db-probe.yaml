@@ -23,7 +23,7 @@ spec:
         - name: JUPYTERHUB_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: jupyterhub-database-password
+              name: $(jupyterhub_secret)
               key: POSTGRESQL_PASSWORD
         name: db-probe
         image: quay.io/modh/jupyterhub-db-probe:v0.2
