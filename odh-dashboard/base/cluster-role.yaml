@@ -35,3 +35,11 @@ rules:
       - console.openshift.io
     resources:
       - consolelinks
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - operator.openshift.io
+    resources:
+      - consoles
