@@ -28,6 +28,7 @@ rules:
       - ''
     resources:
       - services
+      - configmaps
   - verbs:
       - get
       - list
