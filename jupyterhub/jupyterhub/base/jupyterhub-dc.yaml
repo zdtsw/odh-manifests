@@ -17,10 +17,10 @@ spec:
     resources:
       limits:
         cpu: 150m
-        memory: 50Mi
+        memory: 150Mi
       requests:
         cpu: 150m
-        memory: 20Mi
+        memory: 50Mi
     activeDeadlineSeconds: 300
     customParams:
       image: quay.io/openshift/origin-deployer:4.7.0
