@@ -34,6 +34,7 @@ items:
       opendatahub.io/notebook-image-url: "https://github.com/thoth-station/s2i-tensorflow-gpu-notebook"
       opendatahub.io/notebook-image-name: "TensorFlow"
       opendatahub.io/notebook-image-desc: "Jupyter notebook image with GPU support and includes TensorFlow libraries and dependencies to start experimenting with advanced AI/ML notebooks."
+      opendatahub.io/notebook-image-order: "40"
     name: "tensorflow-gpu"
   spec:
     lookupPolicy:
@@ -56,6 +57,7 @@ items:
       opendatahub.io/notebook-image-url: "https://github.com/thoth-station/s2i-pytorch-notebook"
       opendatahub.io/notebook-image-name: "PyTorch"
       opendatahub.io/notebook-image-desc: "Jupyter notebook image with GPU support and includes PyTorch libraries and dependencies to start experimenting with advanced AI/ML notebooks."
+      opendatahub.io/notebook-image-order: "30"
     name: "pytorch-gpu"
   spec:
     lookupPolicy:
