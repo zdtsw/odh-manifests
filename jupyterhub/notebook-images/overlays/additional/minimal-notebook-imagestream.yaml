@@ -15,8 +15,8 @@ spec:
     local: true
   tags:
   - annotations:
-      opendatahub.io/notebook-software: '[{"name":"Python","version":"v3.8.6"}]'
-      opendatahub.io/notebook-python-dependencies: '[{"name":"JupyterLab","version": "3.0.16"}, {"name": "Notebook","version": "6.4.0"}]'
+      opendatahub.io/notebook-software: '[{"name":"Python","version":"v3.8"}]'
+      opendatahub.io/notebook-python-dependencies: '[{"name":"JupyterLab","version": "3.0"}, {"name": "Notebook","version": "6.4"}]'
       openshift.io/imported-from: quay.io/modh/odh-minimal-notebook-container
       opendatahub.io/default-image: "true"
     from:
