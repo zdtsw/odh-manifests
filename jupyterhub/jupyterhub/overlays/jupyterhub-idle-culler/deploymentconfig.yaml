@@ -42,6 +42,13 @@ spec:
                 configMapKeyRef:
                   name: jupyterhub-cfg
                   key: culler_timeout
+          resources:
+            limits:
+              cpu: 150m
+              memory: 50Mi
+            requests:
+              cpu: 150m
+              memory: 50Mi
           command:
             - jupyterhub-idle-culler
             - --timeout=$(CULLER_TIMEOUT)  # in seconds
