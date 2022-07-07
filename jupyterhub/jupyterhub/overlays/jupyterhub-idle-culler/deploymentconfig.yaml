@@ -3,6 +3,14 @@ kind: DeploymentConfig
 metadata:
   name: jupyterhub-idle-culler
 spec:
+  strategy:
+    resources:
+      limits:
+        cpu: 150m
+        memory: 50Mi
+      requests:
+        cpu: 150m
+        memory: 50Mi
   selector:
     app: jupyterhub-idle-culler
   replicas: 1
