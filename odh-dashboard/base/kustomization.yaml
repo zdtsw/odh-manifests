@@ -4,11 +4,13 @@ commonLabels:
   app: rhods-dashboard
   app.kubernetes.io/part-of: rhods-dashboard
 resources:
+- odh-dashboard-crd.yaml
 - role.yaml
 - cluster-role.yaml
 - service-account.yaml
 - role-binding.yaml
 - cluster-role-binding.yaml
+- cluster-monitoring-role-binding.yaml
 - deployment.yaml
 - routes.yaml
 - service.yaml

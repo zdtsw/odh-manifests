@@ -1,13 +1,11 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
-  labels:
-    app: jupyterhub
-  name: jupyterhub
+  name: role-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: jupyterhub
+  kind: ClusterRole
+  name: role
 subjects:
 - kind: ServiceAccount
-  name: jupyterhub-hub
+  name: service-account
