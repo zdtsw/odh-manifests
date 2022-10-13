@@ -6,27 +6,27 @@ bases:
   - ../../base
 
 resources:
-  # Roles
-  - ./roles/ds-pipeline-ui.yaml
-
-  # Rolebindings
-  - ./rolebindings/ds-pipeline-ui.yaml
-  - ./rolebindings/auth-delegator.yaml
-
-  # ServiceAccounts
-  - ./serviceaccounts/ds-pipeline-ui.yaml
-
   # Configmaps
   - ./configmaps/ds-pipeline-ui-configmap.yaml
 
   # Deployments
   - ./deployments/ds-pipeline-ui.yaml
 
-  # Services
-  - ./services/ds-pipeline-ui.yaml
+  # Rolebindings
+  - ./rolebindings/auth-delegator.yaml
+  - ./rolebindings/ds-pipeline-ui.yaml
+
+  # Roles
+  - ./roles/ds-pipeline-ui.yaml
 
   # Routes
   - ./routes/ds-pipeline-ui.yaml
+
+  # ServiceAccounts
+  - ./serviceaccounts/ds-pipeline-ui.yaml
+
+  # Services
+  - ./services/ds-pipeline-ui.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
