@@ -86,6 +86,10 @@ spec:
               value: "true"
             - name: ARGO_ARCHIVE_LOGS
               value: "true"
+            - name: ML_PIPELINE_SERVICE_HOST
+              value: ds-pipeline
+            - name: ML_PIPELINE_SERVICE_PORT
+              value: '8888'
           image: frontend
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -100,7 +104,7 @@ spec:
             initialDelaySeconds: 3
             periodSeconds: 5
             timeoutSeconds: 2
-          name: ml-pipeline-ui
+          name: ds-pipeline-ui
           ports:
             - containerPort: 3000
           readinessProbe:

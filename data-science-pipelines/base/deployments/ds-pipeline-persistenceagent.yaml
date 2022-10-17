@@ -30,7 +30,6 @@ spec:
           command:
             - persistence_agent
             - "--logtostderr=true"
-            - "--namespace=${NAMESPACE}"
             - "--ttlSecondsAfterWorkflowFinish=86400"
             - "--numWorker=2"
             - "--mlPipelineAPIServerName=ds-pipeline"
@@ -54,4 +53,7 @@ spec:
             requests:
               cpu: 120m
               memory: 500Mi
+            limits:
+              cpu: 250m
+              memory: 1Gi
       serviceAccountName: ds-pipeline-persistenceagent

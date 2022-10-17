@@ -47,6 +47,16 @@ spec:
         name: manifests
         path: openshift-pipelines/cluster
     name: openshift-pipelines
+  - kustomizeConfig:
+      overlays:
+        - metadata-store-mariadb
+        - ds-pipeline-ui
+        - object-store-minio
+        - default-configs
+      repoRef:
+        name: manifests
+        path: data-science-pipelines
+    name: data-science-pipelines
   repos:
   - name: manifests
     uri: https://github.com/red-hat-data-services/odh-manifests/tarball/master

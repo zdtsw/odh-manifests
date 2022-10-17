@@ -159,4 +159,7 @@ spec:
             requests:
               cpu: 250m
               memory: 500Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
       serviceAccountName: ds-pipeline
