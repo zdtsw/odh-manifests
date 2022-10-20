@@ -9,13 +9,13 @@ Data Science Pipelines is the Open Data Hub's pipeline solution for data scienti
 
 1. The cluster needs to be OpenShift 4.9 or higher
 2. OpenShift Pipelines 1.7.2 or higher needs to be installed on the cluster
-3. The Open Data Hub operator needs to be installed
+3. The Red Hat Openshift Data Science operator needs to be installed
 4. The default installation namespace for Data Science Pipelines is `redhat-ods-applications`. This namespace will need to be created. In case you wish to install in a custom location, create it and update the kfdef as documented below.
 
 ### Installation Steps
 
 1. Ensure that the prerequisites are met.
-2. Apply the kfdef at [kfctl_openshift_ds-pipelines.yaml](https://github.com/opendatahub-io/odh-manifests/blob/master/kfdef/kfctl_openshift_ds-pipelines.yaml). You may need to update the `namespace` field under `metadata` in case you want to deploy in a namespace that isn't `redhat-ods-applications`.
+2. Apply the kfdef at [kfctl_openshift_ds-pipelines.yaml](https://github.com/red-hat-data-services/odh-manifests/blob/master/kfdef/kfctl_openshift_ds-pipelines.yaml). You may need to update the `namespace` field under `metadata` in case you want to deploy in a namespace that isn't `redhat-ods-applications`.
 3. To find the url for Data Science pipelines, you can run the following command.
     ```bash
     $ oc get route -n <kdef_namespace> ds-pipeline-ui -o jsonpath='{.spec.host}'
@@ -38,10 +38,10 @@ This directory contains artifacts for deploying all backend components of Data S
 ### Overlays
 
 1. metadata-store-mariadb: This overlay contains artifacts for deploying a MariaDB database. MySQL-based databases are currently the only supported backend for Data Science Pipelines, so if you don't have an existing MySQL or MariaDB database deployed, this overlay needs to be applied.
-3. ds-pipeline-ui: This overlay contains deployment artifacts for the Data Science Pipelines UI. Deploying Data Science Pipelines without this overlay will result in only the backend artifacts being created.
-4. object-store-minio: This overlay contains artifacts for deploying Minio as the Object Store to store Pipelines artifacts.
-5. default-configs: This overlay applies default configuration files and credentials (for db and s3 stores)
-6. integration-odhdashboard: This overlay adds configurations necessary to integrate AppTiles, Documentation links, etc, for Data Science Pipelines into RHODS Dashboard
+2. ds-pipeline-ui: This overlay contains deployment artifacts for the Data Science Pipelines UI. Deploying Data Science Pipelines without this overlay will result in only the backend artifacts being created.
+3. object-store-minio: This overlay contains artifacts for deploying Minio as the Object Store to store Pipelines artifacts.
+4. default-configs: This overlay applies default configuration files and credentials (for db and s3 stores)
+5. integration-odhdashboard: This overlay adds configurations necessary to integrate AppTiles, Documentation links, etc, for Data Science Pipelines into RHODS Dashboard
 
 ### Prometheus
 
