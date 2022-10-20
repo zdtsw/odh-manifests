@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   # Build Configs
-  - ./buildconfigs/vizualization-server.yaml
+  - ./buildconfigs/visualization-server.yaml
 
   # CustomResourceDefinitions
   - ./customresourcedefinitions/viewers.yaml
@@ -16,9 +16,6 @@ resources:
   - ./deployments/ds-pipeline-viewer-crd.yaml
   - ./deployments/ds-pipeline-visualizationserver.yaml
   - ./deployments/ds-pipeline.yaml
-
-  # Image Streams
-  - ./imagestreams/visualization-server.yaml
 
   # Rolebindings
   - ./rolebindings/ds-pipeline-scheduledworkflow-binding.yaml
@@ -48,6 +45,9 @@ resources:
   - ./serviceaccounts/ds-pipeline-visualizationserver.yaml
   - ./serviceaccounts/ds-pipeline.yaml
   - ./serviceaccounts/pipeline-runner.yaml
+
+  # Image Streams
+  - ./imagestreams/visualization-server.yaml
 
   # Services
   - ./services/ds-pipeline-visualizationserver.yaml
@@ -99,19 +99,20 @@ vars:
       apiVersion: v1
     fieldref:
       fieldpath: data.ds_pipelines_ui_configuration
+
 configurations:
   - params.yaml
 
 images:
   - name: persistenceagent
-    newName: quay.io/internaldatahub/persistenceagent
-    newTag: 1.1.0
+    newName: quay.io/modh/odh-ml-pipelines-persistenceagent-container
+    newTag: v1.18.0-8
   - name: scheduledworkflow
-    newName: quay.io/internaldatahub/scheduledworkflow
-    newTag: 1.1.0
+    newName: quay.io/modh/odh-ml-pipelines-scheduledworkflow-container
+    newTag: v1.18.0-8
   - name: viewer-crd-controller
-    newName: gcr.io/ml-pipeline/viewer-crd-controller
-    newTag: 1.7.0
+    newName: quay.io/modh/odh-ml-pipelines-viewercontroller-container
+    newTag: v1.18.0-8
   - name: api-server
-    newName: quay.io/internaldatahub/api-server
-    newTag: 1.1.0
+    newName: quay.io/modh/odh-ml-pipelines-api-server-container
+    newTag: v1.18.0-8

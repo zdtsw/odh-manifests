@@ -30,6 +30,8 @@ spec:
     git:
       uri: "https://github.com/red-hat-data-services/data-science-pipelines"
       ref: master
+  runPolicy: Serial
   triggers:
+    - type: ConfigChange
     - type: ImageChange
       imageChange: {}
