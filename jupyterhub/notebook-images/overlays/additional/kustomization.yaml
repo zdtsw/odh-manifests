@@ -8,6 +8,7 @@ resources:
 - minimal-gpu-notebook-imagestream.yaml
 - pytorch-notebook-imagestream.yaml
 - tensorflow-notebook-imagestream.yaml
+- trustyai-notebook-imagestream.yaml
 
 commonLabels:
   opendatahub.io/component: "true"

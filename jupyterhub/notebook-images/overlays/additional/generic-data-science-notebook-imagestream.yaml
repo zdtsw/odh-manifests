@@ -4,7 +4,7 @@ metadata:
   labels:
     opendatahub.io/notebook-image: "true"
   annotations:
-    opendatahub.io/notebook-image-url: "https://github.com/red-hat-data-services/notebooks/tree/main/jupyter/datascience/ubi8-python-3.8"
+    opendatahub.io/notebook-image-url: "https://github.com/red-hat-data-services/notebooks/tree/main/jupyter/datascience"
     opendatahub.io/notebook-image-name: "Standard Data Science"
     opendatahub.io/notebook-image-desc: "Jupyter notebook image with a set of data science libraries that advanced AI/ML notebooks will use as a base image to provide a standard for libraries avialable in all notebooks"
     opendatahub.io/notebook-image-order: "20"
@@ -13,13 +13,25 @@ spec:
   lookupPolicy:
     local: true
   tags:
+  # N Version of the image (v2-2023a-20230322-9f24e3e)
+  - annotations:
+      opendatahub.io/notebook-software: '[{"name":"Python","version":"v3.9"}]'
+      opendatahub.io/notebook-python-dependencies: '[{"name":"Boto3","version":"1.26"},{"name":"Kafka-Python","version":"2.0"},{"name":"Matplotlib","version":"3.6"},{"name":"Numpy","version":"1.24"},{"name":"Pandas","version":"1.5"},{"name":"Scikit-learn","version":"1.2"},{"name":"Scipy","version":"1.10"}]'
+      openshift.io/imported-from: quay.io/modh/odh-generic-data-science-notebook
+      opendatahub.io/workbench-image-recommended: 'true'
+    from:
+      kind: DockerImage
+      name: quay.io/modh/odh-generic-data-science-notebook@sha256:46dbee9764ae96d95fb5719446226bf0b86ec1e8cc695ac12df575a352d79f8f
+    name: "py3.9-v2"
+    referencePolicy:
+      type: Source
+  # N-1 Version of the image
   - annotations:
       opendatahub.io/notebook-software: '[{"name":"Python","version":"v3.8"}]'
       opendatahub.io/notebook-python-dependencies: '[{"name":"Boto3","version":"1.17"},{"name":"Kafka-Python","version":"2.0"},{"name":"Matplotlib","version":"3.4"},{"name":"Numpy","version":"1.19"},{"name":"Pandas","version":"1.2"},{"name":"Scikit-learn","version":"0.24"},{"name":"Scipy","version":"1.6"}]'
       openshift.io/imported-from: quay.io/modh/odh-generic-data-science-notebook
     from:
       kind: DockerImage
-      # if you change the image tag, change the "-N" on the tag name immediately below
       name: quay.io/modh/odh-generic-data-science-notebook@sha256:ebb5613e6b53dc4e8efcfe3878b4cd10ccb77c67d12c00d2b8c9d41aeffd7df5
     name: "py3.8-v1"
     referencePolicy:
