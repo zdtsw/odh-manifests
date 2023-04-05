@@ -13,7 +13,7 @@ spec:
   lookupPolicy:
     local: true
   tags:
-  # N Version of the image (v2-2023a-20230510-e348fda)
+  # N Version of the image
   - annotations:
       opendatahub.io/notebook-software: '[{"name":"Python","version":"v3.9"}]'
       opendatahub.io/notebook-python-dependencies: '[{"name":"Boto3","version":"1.26"},{"name":"Kafka-Python","version":"2.0"},{"name":"Matplotlib","version":"3.6"},{"name":"Numpy","version":"1.24"},{"name":"Pandas","version":"1.5"},{"name":"Scikit-learn","version":"1.2"},{"name":"Scipy","version":"1.10"}]'
@@ -21,7 +21,7 @@ spec:
       opendatahub.io/workbench-image-recommended: 'true'
     from:
       kind: DockerImage
-      name: quay.io/modh/odh-generic-data-science-notebook@sha256:2d4669d8d06f7945a3bfa511c5a18eb75fd1b0b6f6d7d43ecd3c24dd1fe3b03b
+      name: $(odh-generic-data-science-notebook-image-n)
     name: "2023.1"
     referencePolicy:
       type: Local
@@ -32,7 +32,7 @@ spec:
       openshift.io/imported-from: quay.io/modh/odh-generic-data-science-notebook
     from:
       kind: DockerImage
-      name: quay.io/modh/odh-generic-data-science-notebook@sha256:ebb5613e6b53dc4e8efcfe3878b4cd10ccb77c67d12c00d2b8c9d41aeffd7df5
+      name: $(odh-generic-data-science-notebook-image-n-1)
     name: "1.2"
     referencePolicy:
       type: Local
