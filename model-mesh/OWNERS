@@ -1,10 +1,17 @@
 approvers:
-- anishasthana
-- Jooho
+  - anishasthana
+  - danielezonca
+  - heyselbi
+  - israel-hdez
+  - Jooho
+  - VedantMahabaleshwarkar
+  - Xaenalt
 
 reviewers:
   - anishasthana
+  - danielezonca
   - heyselbi
+  - israel-hdez
   - Jooho
-  - Xaenalt
   - VedantMahabaleshwarkar
+  - Xaenalt
