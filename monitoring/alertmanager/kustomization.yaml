@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - alertmanager-service.yaml
   - alertmanager-route.yaml
-  - monitoring-configs.yaml
+  - alertmanager-configs.yaml
