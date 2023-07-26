@@ -14,6 +14,7 @@ For more information, visit the project [GitHub repo](https://github.com/opendat
 2. overlays/authentication: Contains the necessary yaml files to install the
    Open Data Hub Dashboard configured to require users to authenticate to the
    OpenShift cluster before they can access the service
+3. consolelink: only container consolelink manifests
 
 ##### Installation
 Use the `kustomize` tool to process the manifest for the `oc apply` command.
