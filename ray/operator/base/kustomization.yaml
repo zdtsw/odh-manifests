@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+configMapGenerator:
+- name: codeflare-stack-config
+  envs:
+    - params.env
+configurations:
+  - params.yaml
+
+vars:
+- name: namespace
+  objref:
+    kind: ConfigMap
+    name: codeflare-stack-config
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.namespace
+
+resources:
+- ../crd
+- ../rbac
+- ../manager
+- ../prometheus
+- ../scc
+
+images:
+- name: kuberay/operator
+  newName: quay.io/opendatahub/kuberay-operator
+  newTag: v0.5.0
+
