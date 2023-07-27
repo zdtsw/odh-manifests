@@ -15,10 +15,11 @@ configMapGenerator:
     literals:
       - USE_ISTIO=false
       - ADD_FSGROUP=false
-patchesStrategicMerge:
-  - remove_namespace_patch.yaml
-  - manager_openshift_patch.yaml
-  - manager_service_openshift_patch.yaml
+
+patches:
+  - path: remove_namespace_patch.yaml
+  - path: manager_openshift_patch.yaml
+  - path: manager_service_openshift_patch.yaml
 
 configurations:
 - params.yaml

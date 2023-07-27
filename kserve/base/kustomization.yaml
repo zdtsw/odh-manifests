@@ -1,0 +1,138 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../kserve-built
+- ./user_cluster_roles.yaml
+
+namespace: opendatahub
+
+patches:
+- path: kserve-controller-manager-patch.yaml
+- path: inferenceservice-config-patch.yaml
+
+configMapGenerator:
+- envs:
+  - params.env
+  name: kserve-parameters
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+
+
+
+
+
+
+
+
+replacements:
+- source:
+    fieldPath: data.kserve-controller
+    kind: ConfigMap
+    name: kserve-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - spec.template.spec.containers.0.image
+    select:
+      group: apps
+      kind: Deployment
+      name: kserve-controller-manager
+      version: v1
+- source:
+    fieldPath: data.kserve-alibi-explainer
+    kind: ConfigMap
+    name: kserve-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - data.explainers.alibi.image
+    select:
+      group: apps
+      kind: ConfigMap
+      name: inferenceservice-config
+      version: v1
+- source:
+    fieldPath: data.kserve-storage-initializer
+    kind: ConfigMap
+    name: kserve-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - data.storageInitializer.image
+    select:
+      group: apps
+      kind: ConfigMap
+      name: inferenceservice-config
+      version: v1
+- source:
+    fieldPath: data.kserve-alibi-explainer-version
+    kind: ConfigMap
+    name: kserve-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - data.explainers.alibi.defaultImageVersion
+    select:
+      group: apps
+      kind: ConfigMap
+      name: inferenceservice-config
+      version: v1
+- source:
+    fieldPath: data.kserve-art-explainer
+    kind: ConfigMap
+    name: kserve-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - data.explainers.art.image
+    select:
+      group: apps
+      kind: ConfigMap
+      name: inferenceservice-config
+      version: v1
+- source:
+    fieldPath: data.kserve-art-explainer-version
+    kind: ConfigMap
+    name: kserve-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - data.explainers.art.defaultImageVersion
+    select:
+      group: apps
+      kind: ConfigMap
+      name: inferenceservice-config
+      version: v1
+- source:
+    fieldPath: data.kserve-agent
+    kind: ConfigMap
+    name: kserve-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - data.logger.image
+    - data.batcher.image
+    - data.agent.image
+    select:
+      group: apps
+      kind: ConfigMap
+      name: inferenceservice-config
+      version: v1
+- source:
+    fieldPath: data.kserve-router
+    kind: ConfigMap
+    name: kserve-parameters
+    version: v1
+  targets:
+  - fieldPaths:
+    - data.router.image
+    select:
+      group: apps
+      kind: ConfigMap
+      name: inferenceservice-config
+      version: v1
+
+configurations:
+- params.yaml
