@@ -2,23 +2,29 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 configMapGenerator:
-- name: codeflare-stack-config
-  envs:
-    - params.env
+- envs:
+  - params.env
+  name: codeflare-stack-config
 configurations:
-  - params.yaml
-
-vars:
-- name: namespace
-  objref:
-    kind: ConfigMap
-    name: codeflare-stack-config
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.namespace
+- params.yaml
 
 resources:
 - codeflare-notebook-imagestream.yaml
 - instascale.yaml
 - mcad.yaml
 - ../rbac
+
+replacements:
+- source:
+    fieldPath: data.namespace
+    kind: ConfigMap
+    name: codeflare-stack-config
+    version: v1
+  targets:
+  - fieldPaths:
+    - subjects.0.namespace
+    select:
+      group: rbac.authorization.k8s.io
+      kind: ClusterRoleBinding
+      name: mcad-controller-ray-clusterrolebinding
+      version: v1
