@@ -4,4 +4,4 @@ commonLabels:
   app: rhods-dashboard
   app.kubernetes.io/part-of: rhods-dashboard
 resources:
-- consolelink.yaml
+- odh-enabled-applications-config.configmap.yaml
