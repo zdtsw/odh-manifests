@@ -1,10 +1,10 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: rhods-dashboard-monitoring
+  name: odh-dashboard-monitoring
 subjects:
   - kind: ServiceAccount
-    name: rhods-dashboard
+    name: odh-dashboard
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app: rhods-dashboard
+  app.kubernetes.io/part-of: rhods-dashboard
+bases:
+  - ../../base
+# resources:
+
+configMapGenerator:
+- name: odh-dashboard-image-parameters
+  env: params.env
+generatorOptions:
+  disableNameSuffixHash: true
+vars:
+- name: odh-dashboard-image
+  objref:
+    kind: ConfigMap
+    name: odh-dashboard-image-parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.odh-dashboard-image
+configurations:
+- params.yaml
