@@ -5,7 +5,6 @@ commonLabels:
   app.kubernetes.io/part-of: rhods-dashboard
 bases:
   - ../../base
-
 patchesJson6902:
   - path: service-account.yaml
     target:
@@ -70,7 +69,6 @@ patchesJson6902:
       version: v1
       kind: Route
       name: odh-dashboard
-
 configMapGenerator:
 - name: odh-dashboard-image-parameters
   env: params.env
