@@ -26,7 +26,7 @@ spec:
 
     Before installing Starburst Enterprise, you will need:
 
-    - Access to an OpenShift cluster with [correctly-sized nodes](https://docs.starburst.io/356-e/k8s/requirements.html#k8s-cluster-requirements), using IAM credentials, and with sufficient Elastic IPs.
+    - Access to an OpenShift cluster with [correctly-sized nodes](https://docs.starburst.io/latest/k8s/requirements), using IAM credentials, and with sufficient Elastic IPs.
     - Previously installed and configured Kubernetes, including access to **kubectl**.
     - An editor suitable for editing YAML files.
     - Your SEP (Starburst Enterprise) license file.
