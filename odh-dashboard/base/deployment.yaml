@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rhods-dashboard
+  name: odh-dashboard
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
-      deployment: rhods-dashboard
+      deployment: odh-dashboard
   template:
     metadata:
       labels:
-        deployment: rhods-dashboard
+        deployment: odh-dashboard
     spec:
       affinity:
         podAntiAffinity:
@@ -22,12 +22,12 @@ spec:
                     - key: app
                       operator: In
                       values:
-                        - rhods-dashboard
+                        - odh-dashboard
                 topologyKey: topology.kubernetes.io/zone
-      serviceAccount: rhods-dashboard
+      serviceAccount: odh-dashboard
       containers:
-      - name: rhods-dashboard
-        image: $(odh-dashboard-image)
+      - name: odh-dashboard
+        image: odh-dashboard
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -56,5 +56,72 @@ spec:
           periodSeconds: 30
           successThreshold: 1
           failureThreshold: 3
-      imagePullSecrets:
-      - name: addon-managed-odh-pullsecret
+      - name: oauth-proxy
+        env:
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+        args:
+          - --https-address=:8443
+          - --provider=openshift
+          - --upstream=http://localhost:8080
+          - --tls-cert=/etc/tls/private/tls.crt
+          - --tls-key=/etc/tls/private/tls.key
+          - --client-id=dashboard-oauth-client
+          - --client-secret-file=/etc/oauth/client/secret
+          - --scope=user:full
+          - --cookie-secret-file=/etc/oauth/config/cookie_secret
+          - --cookie-expire=23h0m0s
+          - --pass-access-token
+          - '--openshift-delegate-urls={"/": {"resource": "services", "verb": "get", "name": "odh-dashboard", "namespace": "$(NAMESPACE)"}}'
+          - --skip-auth-regex=^/metrics
+        image: oauth-proxy
+        ports:
+          - containerPort: 8443
+            name: https
+        livenessProbe:
+          httpGet:
+            path: /oauth/healthz
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /oauth/healthz
+            port: 8443
+            scheme: HTTPS
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            memory: 1Gi
+        volumeMounts:
+          - mountPath: /etc/tls/private
+            name: proxy-tls
+          - mountPath: /etc/oauth/config
+            name: oauth-config
+          - mountPath: /etc/oauth/client
+            name: oauth-client
+      volumes:
+      - name: proxy-tls
+        secret:
+          secretName: dashboard-proxy-tls
+      - name: oauth-config
+        secret:
+          secretName: dashboard-oauth-config-generated
+      - name: oauth-client
+        secret:
+          secretName: dashboard-oauth-client-generated
